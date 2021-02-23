@@ -1,0 +1,3178 @@
+{
+  "skeletonType": "PatientLevelPredictionExistingStudy",
+  "skeletonVersion": "v0.0.1",
+  "packageName": "EmcWaltersDementiaModel",
+  "description": "Walters model replicated by EMC",
+  "createdBy": "add name",
+  "organizationName": "Erasmus University Medical Center",
+  "createdDate": "2021-02-22",
+  "CohortsToCreate": [
+    {
+      "id": 18210,
+      "atlasId": 18210,
+      "name": "Walters_Target_0_Prior_0_Post",
+      "attr_row.names": 1,
+      "attr_class": "data.frame"
+    },
+    {
+      "id": 7414,
+      "atlasId": 7414,
+      "name": "Persons_with_dementia",
+      "attr_row.names": 2,
+      "attr_class": "data.frame"
+    }
+  ],
+  "settings": [
+    {
+      "targetCohortId": 18210,
+      "targetCohortName": "Walters Target 0 Prior 0 Post",
+      "outcomeId": 7414,
+      "outcomeName": "Persons with dementia",
+      "modelName": "walters_dementia_model",
+      "analysisId": 1,
+      "attr_row.names": 1,
+      "attr_class": "data.frame"
+    }
+  ],
+  "cohortDefinitions": [
+    {
+      "id": 18210,
+      "name": "Walters_Target_0_Prior_0_Post",
+      "description": "patients 60-99 with outpatient visit index and no prior dementia, pre-2014 visits to ensure all persons are eligible for full 5-year risk follow-up, even if they dont actually have it",
+      "createdDate": 1598540959869,
+      "modifiedDate": 1611310637951,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "VisitOccurrence": {
+                "CodesetId": 1,
+                "OccurrenceStartDate": ["2014-01-01", "lt"],
+                "VisitTypeExclude": false,
+                "Age": {
+                  "Value": 60,
+                  "Op": "bt",
+                  "Extent": 79
+                }
+              }
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "Last"
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "Dementia",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4182210,
+                    "CONCEPT_NAME": "Dementia",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "52448006",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 1,
+            "name": "outpatient visit",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 9202,
+                    "CONCEPT_NAME": "Outpatient Visit",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "OP",
+                    "DOMAIN_ID": "Visit",
+                    "VOCABULARY_ID": "Visit",
+                    "CONCEPT_CLASS_ID": "Visit"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 2,
+            "name": "memory loss, confusion, cognitive decline",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 443432,
+                    "CONCEPT_NAME": "Impaired cognition",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "386806002",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4304008,
+                    "CONCEPT_NAME": "Memory impairment",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "386807006",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4164633,
+                    "CONCEPT_NAME": "Clouded consciousness",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "40917007",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 3,
+            "name": "Exclusion diseases indicating subtypes of dementia",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 374888,
+                    "CONCEPT_NAME": "Dementia associated with another disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "191519005",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 380701,
+                    "CONCEPT_NAME": "Diffuse Lewy body disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "80098002",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 439727,
+                    "CONCEPT_NAME": "Human immunodeficiency virus infection",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "86406008",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 374341,
+                    "CONCEPT_NAME": "Huntington's chorea",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "58756001",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4140090,
+                    "CONCEPT_NAME": "Parkinsonism",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "32798002",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 436092,
+                    "CONCEPT_NAME": "Pick's disease",
+                    "STANDARD_CONCEPT": "N",
+                    "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+                    "INVALID_REASON": "U",
+                    "INVALID_REASON_CAPTION": "Invalid",
+                    "CONCEPT_CODE": "13092008",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 4,
+            "name": "ATC Anti-dementia drugs",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 21604792,
+                    "CONCEPT_NAME": "ANTI-DEMENTIA DRUGS",
+                    "STANDARD_CONCEPT": "C",
+                    "STANDARD_CONCEPT_CAPTION": "Classification",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "N06D",
+                    "DOMAIN_ID": "Drug",
+                    "VOCABULARY_ID": "ATC",
+                    "CONCEPT_CLASS_ID": "ATC 3rd"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 5,
+            "name": "drug-induced (and alcohol-induced) dementia",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 378726,
+                    "CONCEPT_NAME": "Dementia associated with alcoholism",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "281004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 376095,
+                    "CONCEPT_NAME": "Drug-induced dementia",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "191493005",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 6,
+            "name": "dementia in other conditions NOS",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 374888,
+                    "CONCEPT_NAME": "Dementia associated with another disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "191519005",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 7,
+            "name": "HIV positive",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4013106,
+                    "CONCEPT_NAME": "HIV positive",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "165816005",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 8,
+            "name": "huntington's",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 374341,
+                    "CONCEPT_NAME": "Huntington's chorea",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "58756001",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 9,
+            "name": "lewy body disease",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 380701,
+                    "CONCEPT_NAME": "Diffuse Lewy body disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "80098002",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 11,
+            "name": "parkinson's",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 381270,
+                    "CONCEPT_NAME": "Parkinson's disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "49049000",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 12,
+            "name": "pick's",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 436092,
+                    "CONCEPT_NAME": "Pick's disease",
+                    "STANDARD_CONCEPT": "N",
+                    "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+                    "INVALID_REASON": "U",
+                    "INVALID_REASON_CAPTION": "Invalid",
+                    "CONCEPT_CODE": "13092008",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 44782710,
+                    "CONCEPT_NAME": "Dementia due to Pick's disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "21921000119103",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 13,
+            "name": "cruetzfeldt-jacob disease",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 36150370,
+                    "CONCEPT_NAME": "Creutzfeld-Jacob disease",
+                    "STANDARD_CONCEPT": "C",
+                    "STANDARD_CONCEPT_CAPTION": "Classification",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "10011382",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "MedDRA",
+                    "CONCEPT_CLASS_ID": "LLT"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 36774976,
+                    "CONCEPT_NAME": "Dementia due to Creutzfeldt-Jacob disease",
+                    "STANDARD_CONCEPT": "N",
+                    "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+                    "INVALID_REASON": "D",
+                    "INVALID_REASON_CAPTION": "Invalid",
+                    "CONCEPT_CODE": "10012273",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "MedDRA",
+                    "CONCEPT_CLASS_ID": "LLT"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "First",
+        "ExpressionLimit": "All",
+        "InclusionRules": [
+          {
+            "name": "no prior dementia, memory loss, confusion, cognitive decline",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [
+                {
+                  "Criteria": {
+                    "ConditionOccurrence": {
+                      "CodesetId": 0,
+                      "ConditionTypeExclude": false
+                    }
+                  },
+                  "StartWindow": {
+                    "Start": -1,
+                    "End": [0, 1],
+                    "UseIndexEnd": false,
+                    "UseEventEnd": false
+                  },
+                  "RestrictVisit": false,
+                  "IgnoreObservationPeriod": false,
+                  "Occurrence": {
+                    "Type": 0,
+                    "Count": 0,
+                    "IsDistinct": false
+                  }
+                },
+                {
+                  "Criteria": {
+                    "ConditionOccurrence": {
+                      "CodesetId": 2,
+                      "ConditionTypeExclude": false
+                    }
+                  },
+                  "StartWindow": {
+                    "Start": -1,
+                    "End": [0, 1],
+                    "UseIndexEnd": false,
+                    "UseEventEnd": false
+                  },
+                  "RestrictVisit": false,
+                  "IgnoreObservationPeriod": false,
+                  "Occurrence": {
+                    "Type": 0,
+                    "Count": 0,
+                    "IsDistinct": false
+                  }
+                }
+              ],
+              "DemographicCriteriaList": {
+                "attr_class": "AsIs"
+              },
+              "Groups": {
+                "attr_class": "AsIs"
+              }
+            }
+          },
+          {
+            "name": "no prior drug-induced (and alcohol-induced) dementia",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [
+                {
+                  "Criteria": {
+                    "ConditionOccurrence": {
+                      "CodesetId": 5,
+                      "ConditionTypeExclude": false
+                    }
+                  },
+                  "StartWindow": {
+                    "Start": -1,
+                    "End": [0, 1],
+                    "UseIndexEnd": false,
+                    "UseEventEnd": false
+                  },
+                  "RestrictVisit": false,
+                  "IgnoreObservationPeriod": false,
+                  "Occurrence": {
+                    "Type": 2,
+                    "Count": 0,
+                    "IsDistinct": false
+                  }
+                }
+              ],
+              "DemographicCriteriaList": {
+                "attr_class": "AsIs"
+              },
+              "Groups": {
+                "attr_class": "AsIs"
+              }
+            }
+          },
+          {
+            "name": "no prior dementia in other conditions NOS",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [
+                {
+                  "Criteria": {
+                    "ConditionOccurrence": {
+                      "CodesetId": 6,
+                      "ConditionTypeExclude": false
+                    }
+                  },
+                  "StartWindow": {
+                    "Start": -1,
+                    "End": [0, 1],
+                    "UseIndexEnd": false,
+                    "UseEventEnd": false
+                  },
+                  "RestrictVisit": false,
+                  "IgnoreObservationPeriod": false,
+                  "Occurrence": {
+                    "Type": 2,
+                    "Count": 0,
+                    "IsDistinct": false
+                  }
+                }
+              ],
+              "DemographicCriteriaList": {
+                "attr_class": "AsIs"
+              },
+              "Groups": {
+                "attr_class": "AsIs"
+              }
+            }
+          },
+          {
+            "name": "no HIV positive",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [
+                {
+                  "Criteria": {
+                    "ConditionOccurrence": {
+                      "CodesetId": 7,
+                      "ConditionTypeExclude": false
+                    }
+                  },
+                  "StartWindow": {
+                    "Start": -1,
+                    "End": [0, 1],
+                    "UseIndexEnd": false,
+                    "UseEventEnd": false
+                  },
+                  "RestrictVisit": false,
+                  "IgnoreObservationPeriod": false,
+                  "Occurrence": {
+                    "Type": 2,
+                    "Count": 0,
+                    "IsDistinct": false
+                  }
+                }
+              ],
+              "DemographicCriteriaList": {
+                "attr_class": "AsIs"
+              },
+              "Groups": {
+                "attr_class": "AsIs"
+              }
+            }
+          },
+          {
+            "name": "no huntington's",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [
+                {
+                  "Criteria": {
+                    "ConditionOccurrence": {
+                      "CodesetId": 8,
+                      "ConditionTypeExclude": false
+                    }
+                  },
+                  "StartWindow": {
+                    "Start": -1,
+                    "End": [0, 1],
+                    "UseIndexEnd": false,
+                    "UseEventEnd": false
+                  },
+                  "RestrictVisit": false,
+                  "IgnoreObservationPeriod": false,
+                  "Occurrence": {
+                    "Type": 2,
+                    "Count": 0,
+                    "IsDistinct": false
+                  }
+                }
+              ],
+              "DemographicCriteriaList": {
+                "attr_class": "AsIs"
+              },
+              "Groups": {
+                "attr_class": "AsIs"
+              }
+            }
+          },
+          {
+            "name": "no lewy body disease",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [
+                {
+                  "Criteria": {
+                    "ConditionOccurrence": {
+                      "CodesetId": 9,
+                      "ConditionTypeExclude": false
+                    }
+                  },
+                  "StartWindow": {
+                    "Start": -1,
+                    "End": [0, 1],
+                    "UseIndexEnd": false,
+                    "UseEventEnd": false
+                  },
+                  "RestrictVisit": false,
+                  "IgnoreObservationPeriod": false,
+                  "Occurrence": {
+                    "Type": 2,
+                    "Count": 0,
+                    "IsDistinct": false
+                  }
+                }
+              ],
+              "DemographicCriteriaList": {
+                "attr_class": "AsIs"
+              },
+              "Groups": {
+                "attr_class": "AsIs"
+              }
+            }
+          },
+          {
+            "name": "no parkinson's",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [
+                {
+                  "Criteria": {
+                    "ConditionOccurrence": {
+                      "CodesetId": 11,
+                      "ConditionTypeExclude": false
+                    }
+                  },
+                  "StartWindow": {
+                    "Start": -1,
+                    "End": [0, 1],
+                    "UseIndexEnd": false,
+                    "UseEventEnd": false
+                  },
+                  "RestrictVisit": false,
+                  "IgnoreObservationPeriod": false,
+                  "Occurrence": {
+                    "Type": 2,
+                    "Count": 0,
+                    "IsDistinct": false
+                  }
+                }
+              ],
+              "DemographicCriteriaList": {
+                "attr_class": "AsIs"
+              },
+              "Groups": {
+                "attr_class": "AsIs"
+              }
+            }
+          },
+          {
+            "name": "no pick's",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [
+                {
+                  "Criteria": {
+                    "ConditionOccurrence": {
+                      "CodesetId": 12,
+                      "ConditionTypeExclude": false
+                    }
+                  },
+                  "StartWindow": {
+                    "Start": -1,
+                    "End": [0, 1],
+                    "UseIndexEnd": false,
+                    "UseEventEnd": false
+                  },
+                  "RestrictVisit": false,
+                  "IgnoreObservationPeriod": false,
+                  "Occurrence": {
+                    "Type": 2,
+                    "Count": 0,
+                    "IsDistinct": false
+                  }
+                }
+              ],
+              "DemographicCriteriaList": {
+                "attr_class": "AsIs"
+              },
+              "Groups": {
+                "attr_class": "AsIs"
+              }
+            }
+          },
+          {
+            "name": "no cruetzfeldt-jacob disease",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [
+                {
+                  "Criteria": {
+                    "ConditionOccurrence": {
+                      "CodesetId": 13,
+                      "ConditionTypeExclude": false
+                    }
+                  },
+                  "StartWindow": {
+                    "Start": -1,
+                    "End": [0, 1],
+                    "UseIndexEnd": false,
+                    "UseEventEnd": false
+                  },
+                  "RestrictVisit": false,
+                  "IgnoreObservationPeriod": false,
+                  "Occurrence": {
+                    "Type": 2,
+                    "Count": 0,
+                    "IsDistinct": false
+                  }
+                }
+              ],
+              "DemographicCriteriaList": {
+                "attr_class": "AsIs"
+              },
+              "Groups": {
+                "attr_class": "AsIs"
+              }
+            }
+          }
+        ],
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"VisitOccurrence\": {\n \"CodesetId\":        1,\n\"OccurrenceStartDate\": {\n \"Value\": \"2014-01-01\",\n\"Op\": \"lt\" \n},\n\"VisitTypeExclude\": false,\n\"Age\": {\n \"Value\":       60,\n\"Op\": \"bt\",\n\"Extent\":       79 \n} \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"Last\" \n} \n},\n\"ConceptSets\": [\n {\n \"id\":        0,\n\"name\": \"Dementia\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  4182210,\n\"CONCEPT_NAME\": \"Dementia\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"52448006\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        1,\n\"name\": \"outpatient visit\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":     9202,\n\"CONCEPT_NAME\": \"Outpatient Visit\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"OP\",\n\"DOMAIN_ID\": \"Visit\",\n\"VOCABULARY_ID\": \"Visit\",\n\"CONCEPT_CLASS_ID\": \"Visit\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        2,\n\"name\": \"memory loss, confusion, cognitive decline\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":   443432,\n\"CONCEPT_NAME\": \"Impaired cognition\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"386806002\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4304008,\n\"CONCEPT_NAME\": \"Memory impairment\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"386807006\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4164633,\n\"CONCEPT_NAME\": \"Clouded consciousness\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"40917007\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        3,\n\"name\": \"Exclusion diseases indicating subtypes of dementia\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":   374888,\n\"CONCEPT_NAME\": \"Dementia associated with another disease\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"191519005\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   380701,\n\"CONCEPT_NAME\": \"Diffuse Lewy body disease\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"80098002\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   439727,\n\"CONCEPT_NAME\": \"Human immunodeficiency virus infection\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"86406008\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   374341,\n\"CONCEPT_NAME\": \"Huntington's chorea\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"58756001\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4140090,\n\"CONCEPT_NAME\": \"Parkinsonism\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"32798002\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   436092,\n\"CONCEPT_NAME\": \"Pick's disease\",\n\"STANDARD_CONCEPT\": \"N\",\n\"STANDARD_CONCEPT_CAPTION\": \"Non-Standard\",\n\"INVALID_REASON\": \"U\",\n\"INVALID_REASON_CAPTION\": \"Invalid\",\n\"CONCEPT_CODE\": \"13092008\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        4,\n\"name\": \"ATC Anti-dementia drugs\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\": 2.160479e+07,\n\"CONCEPT_NAME\": \"ANTI-DEMENTIA DRUGS\",\n\"STANDARD_CONCEPT\": \"C\",\n\"STANDARD_CONCEPT_CAPTION\": \"Classification\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"N06D\",\n\"DOMAIN_ID\": \"Drug\",\n\"VOCABULARY_ID\": \"ATC\",\n\"CONCEPT_CLASS_ID\": \"ATC 3rd\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        5,\n\"name\": \"drug-induced (and alcohol-induced) dementia\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":   378726,\n\"CONCEPT_NAME\": \"Dementia associated with alcoholism\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"281004\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   376095,\n\"CONCEPT_NAME\": \"Drug-induced dementia\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"191493005\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        6,\n\"name\": \"dementia in other conditions NOS\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":   374888,\n\"CONCEPT_NAME\": \"Dementia associated with another disease\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"191519005\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        7,\n\"name\": \"HIV positive\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  4013106,\n\"CONCEPT_NAME\": \"HIV positive\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"165816005\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        8,\n\"name\": \"huntington's\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":   374341,\n\"CONCEPT_NAME\": \"Huntington's chorea\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"58756001\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        9,\n\"name\": \"lewy body disease\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":   380701,\n\"CONCEPT_NAME\": \"Diffuse Lewy body disease\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"80098002\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":       11,\n\"name\": \"parkinson's\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":   381270,\n\"CONCEPT_NAME\": \"Parkinson's disease\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"49049000\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":       12,\n\"name\": \"pick's\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":   436092,\n\"CONCEPT_NAME\": \"Pick's disease\",\n\"STANDARD_CONCEPT\": \"N\",\n\"STANDARD_CONCEPT_CAPTION\": \"Non-Standard\",\n\"INVALID_REASON\": \"U\",\n\"INVALID_REASON_CAPTION\": \"Invalid\",\n\"CONCEPT_CODE\": \"13092008\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\": 4.478271e+07,\n\"CONCEPT_NAME\": \"Dementia due to Pick's disease\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"21921000119103\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":       13,\n\"name\": \"cruetzfeldt-jacob disease\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\": 3.615037e+07,\n\"CONCEPT_NAME\": \"Creutzfeld-Jacob disease\",\n\"STANDARD_CONCEPT\": \"C\",\n\"STANDARD_CONCEPT_CAPTION\": \"Classification\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"10011382\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"MedDRA\",\n\"CONCEPT_CLASS_ID\": \"LLT\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\": 3.677498e+07,\n\"CONCEPT_NAME\": \"Dementia due to Creutzfeldt-Jacob disease\",\n\"STANDARD_CONCEPT\": \"N\",\n\"STANDARD_CONCEPT_CAPTION\": \"Non-Standard\",\n\"INVALID_REASON\": \"D\",\n\"INVALID_REASON_CAPTION\": \"Invalid\",\n\"CONCEPT_CODE\": \"10012273\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"MedDRA\",\n\"CONCEPT_CLASS_ID\": \"LLT\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"First\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"All\" \n},\n\"InclusionRules\": [\n {\n \"name\": \"no prior dementia, memory loss, confusion, cognitive decline\",\n\"expression\": {\n \"Type\": \"ALL\",\n\"CriteriaList\": [\n {\n \"Criteria\": {\n \"ConditionOccurrence\": {\n \"CodesetId\":        0,\n\"ConditionTypeExclude\": false \n} \n},\n\"StartWindow\": {\n \"Start\": {\n \"Coeff\":       -1 \n},\n\"End\": {\n \"Days\":        0,\n\"Coeff\":        1 \n},\n\"UseIndexEnd\": false,\n\"UseEventEnd\": false \n},\n\"RestrictVisit\": false,\n\"IgnoreObservationPeriod\": false,\n\"Occurrence\": {\n \"Type\":        0,\n\"Count\":        0,\n\"IsDistinct\": false \n} \n},\n{\n \"Criteria\": {\n \"ConditionOccurrence\": {\n \"CodesetId\":        2,\n\"ConditionTypeExclude\": false \n} \n},\n\"StartWindow\": {\n \"Start\": {\n \"Coeff\":       -1 \n},\n\"End\": {\n \"Days\":        0,\n\"Coeff\":        1 \n},\n\"UseIndexEnd\": false,\n\"UseEventEnd\": false \n},\n\"RestrictVisit\": false,\n\"IgnoreObservationPeriod\": false,\n\"Occurrence\": {\n \"Type\":        0,\n\"Count\":        0,\n\"IsDistinct\": false \n} \n} \n],\n\"DemographicCriteriaList\": [],\n\"Groups\": [] \n} \n},\n{\n \"name\": \"no prior drug-induced (and alcohol-induced) dementia\",\n\"expression\": {\n \"Type\": \"ALL\",\n\"CriteriaList\": [\n {\n \"Criteria\": {\n \"ConditionOccurrence\": {\n \"CodesetId\":        5,\n\"ConditionTypeExclude\": false \n} \n},\n\"StartWindow\": {\n \"Start\": {\n \"Coeff\":       -1 \n},\n\"End\": {\n \"Days\":        0,\n\"Coeff\":        1 \n},\n\"UseIndexEnd\": false,\n\"UseEventEnd\": false \n},\n\"RestrictVisit\": false,\n\"IgnoreObservationPeriod\": false,\n\"Occurrence\": {\n \"Type\":        2,\n\"Count\":        0,\n\"IsDistinct\": false \n} \n} \n],\n\"DemographicCriteriaList\": [],\n\"Groups\": [] \n} \n},\n{\n \"name\": \"no prior dementia in other conditions NOS\",\n\"expression\": {\n \"Type\": \"ALL\",\n\"CriteriaList\": [\n {\n \"Criteria\": {\n \"ConditionOccurrence\": {\n \"CodesetId\":        6,\n\"ConditionTypeExclude\": false \n} \n},\n\"StartWindow\": {\n \"Start\": {\n \"Coeff\":       -1 \n},\n\"End\": {\n \"Days\":        0,\n\"Coeff\":        1 \n},\n\"UseIndexEnd\": false,\n\"UseEventEnd\": false \n},\n\"RestrictVisit\": false,\n\"IgnoreObservationPeriod\": false,\n\"Occurrence\": {\n \"Type\":        2,\n\"Count\":        0,\n\"IsDistinct\": false \n} \n} \n],\n\"DemographicCriteriaList\": [],\n\"Groups\": [] \n} \n},\n{\n \"name\": \"no HIV positive\",\n\"expression\": {\n \"Type\": \"ALL\",\n\"CriteriaList\": [\n {\n \"Criteria\": {\n \"ConditionOccurrence\": {\n \"CodesetId\":        7,\n\"ConditionTypeExclude\": false \n} \n},\n\"StartWindow\": {\n \"Start\": {\n \"Coeff\":       -1 \n},\n\"End\": {\n \"Days\":        0,\n\"Coeff\":        1 \n},\n\"UseIndexEnd\": false,\n\"UseEventEnd\": false \n},\n\"RestrictVisit\": false,\n\"IgnoreObservationPeriod\": false,\n\"Occurrence\": {\n \"Type\":        2,\n\"Count\":        0,\n\"IsDistinct\": false \n} \n} \n],\n\"DemographicCriteriaList\": [],\n\"Groups\": [] \n} \n},\n{\n \"name\": \"no huntington's\",\n\"expression\": {\n \"Type\": \"ALL\",\n\"CriteriaList\": [\n {\n \"Criteria\": {\n \"ConditionOccurrence\": {\n \"CodesetId\":        8,\n\"ConditionTypeExclude\": false \n} \n},\n\"StartWindow\": {\n \"Start\": {\n \"Coeff\":       -1 \n},\n\"End\": {\n \"Days\":        0,\n\"Coeff\":        1 \n},\n\"UseIndexEnd\": false,\n\"UseEventEnd\": false \n},\n\"RestrictVisit\": false,\n\"IgnoreObservationPeriod\": false,\n\"Occurrence\": {\n \"Type\":        2,\n\"Count\":        0,\n\"IsDistinct\": false \n} \n} \n],\n\"DemographicCriteriaList\": [],\n\"Groups\": [] \n} \n},\n{\n \"name\": \"no lewy body disease\",\n\"expression\": {\n \"Type\": \"ALL\",\n\"CriteriaList\": [\n {\n \"Criteria\": {\n \"ConditionOccurrence\": {\n \"CodesetId\":        9,\n\"ConditionTypeExclude\": false \n} \n},\n\"StartWindow\": {\n \"Start\": {\n \"Coeff\":       -1 \n},\n\"End\": {\n \"Days\":        0,\n\"Coeff\":        1 \n},\n\"UseIndexEnd\": false,\n\"UseEventEnd\": false \n},\n\"RestrictVisit\": false,\n\"IgnoreObservationPeriod\": false,\n\"Occurrence\": {\n \"Type\":        2,\n\"Count\":        0,\n\"IsDistinct\": false \n} \n} \n],\n\"DemographicCriteriaList\": [],\n\"Groups\": [] \n} \n},\n{\n \"name\": \"no parkinson's\",\n\"expression\": {\n \"Type\": \"ALL\",\n\"CriteriaList\": [\n {\n \"Criteria\": {\n \"ConditionOccurrence\": {\n \"CodesetId\":       11,\n\"ConditionTypeExclude\": false \n} \n},\n\"StartWindow\": {\n \"Start\": {\n \"Coeff\":       -1 \n},\n\"End\": {\n \"Days\":        0,\n\"Coeff\":        1 \n},\n\"UseIndexEnd\": false,\n\"UseEventEnd\": false \n},\n\"RestrictVisit\": false,\n\"IgnoreObservationPeriod\": false,\n\"Occurrence\": {\n \"Type\":        2,\n\"Count\":        0,\n\"IsDistinct\": false \n} \n} \n],\n\"DemographicCriteriaList\": [],\n\"Groups\": [] \n} \n},\n{\n \"name\": \"no pick's\",\n\"expression\": {\n \"Type\": \"ALL\",\n\"CriteriaList\": [\n {\n \"Criteria\": {\n \"ConditionOccurrence\": {\n \"CodesetId\":       12,\n\"ConditionTypeExclude\": false \n} \n},\n\"StartWindow\": {\n \"Start\": {\n \"Coeff\":       -1 \n},\n\"End\": {\n \"Days\":        0,\n\"Coeff\":        1 \n},\n\"UseIndexEnd\": false,\n\"UseEventEnd\": false \n},\n\"RestrictVisit\": false,\n\"IgnoreObservationPeriod\": false,\n\"Occurrence\": {\n \"Type\":        2,\n\"Count\":        0,\n\"IsDistinct\": false \n} \n} \n],\n\"DemographicCriteriaList\": [],\n\"Groups\": [] \n} \n},\n{\n \"name\": \"no cruetzfeldt-jacob disease\",\n\"expression\": {\n \"Type\": \"ALL\",\n\"CriteriaList\": [\n {\n \"Criteria\": {\n \"ConditionOccurrence\": {\n \"CodesetId\":       13,\n\"ConditionTypeExclude\": false \n} \n},\n\"StartWindow\": {\n \"Start\": {\n \"Coeff\":       -1 \n},\n\"End\": {\n \"Days\":        0,\n\"Coeff\":        1 \n},\n\"UseIndexEnd\": false,\n\"UseEventEnd\": false \n},\n\"RestrictVisit\": false,\n\"IgnoreObservationPeriod\": false,\n\"Occurrence\": {\n \"Type\":        2,\n\"Count\":        0,\n\"IsDistinct\": false \n} \n} \n],\n\"DemographicCriteriaList\": [],\n\"Groups\": [] \n} \n} \n],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    },
+    {
+      "id": 7414,
+      "name": "Persons_with_dementia",
+      "description": "The first condition record of dementia",
+      "createdDate": 1535323138657,
+      "modifiedDate": 1550405184850,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 10,
+                "First": true,
+                "ConditionTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "First"
+        },
+        "ConceptSets": [
+          {
+            "id": 10,
+            "name": "[LEGEND HTN] Dementia",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4182210,
+                    "CONCEPT_NAME": "Dementia",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "52448006",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 377788,
+                    "CONCEPT_NAME": "General paresis - neurosyphilis",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "51928006",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 372610,
+                    "CONCEPT_NAME": "Postconcussion syndrome",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "40425004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 37116464,
+                    "CONCEPT_NAME": "Dementia caused by heavy metal exposure",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "733184002",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4244346,
+                    "CONCEPT_NAME": "Dialysis dementia",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "9345005",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 37017247,
+                    "CONCEPT_NAME": "Presenile dementia co-occurrent with human immunodeficiency virus infection",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "713488003",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 37017549,
+                    "CONCEPT_NAME": "Dementia co-occurrent with human immunodeficiency virus infection",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "713844000",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "First",
+        "ExpressionLimit": "First",
+        "InclusionRules": {
+          "attr_class": "AsIs"
+        },
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"ConditionOccurrence\": {\n \"CodesetId\":       10,\n\"First\": true,\n\"ConditionTypeExclude\": false \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"First\" \n} \n},\n\"ConceptSets\": [\n {\n \"id\":       10,\n\"name\": \"[LEGEND HTN] Dementia\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  4182210,\n\"CONCEPT_NAME\": \"Dementia\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"52448006\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   377788,\n\"CONCEPT_NAME\": \"General paresis - neurosyphilis\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"51928006\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": true,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   372610,\n\"CONCEPT_NAME\": \"Postconcussion syndrome\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"40425004\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": true,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\": 3.711646e+07,\n\"CONCEPT_NAME\": \"Dementia caused by heavy metal exposure\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"733184002\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": true,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4244346,\n\"CONCEPT_NAME\": \"Dialysis dementia\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"9345005\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": true,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\": 3.701725e+07,\n\"CONCEPT_NAME\": \"Presenile dementia co-occurrent with human immunodeficiency virus infection\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"713488003\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": true,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\": 3.701755e+07,\n\"CONCEPT_NAME\": \"Dementia co-occurrent with human immunodeficiency virus infection\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"713844000\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": true,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"First\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"First\" \n},\n\"InclusionRules\": [],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    },
+    {
+      "id": 18203,
+      "name": "BMI",
+      "createdDate": 1598533822991,
+      "modifiedDate": 1600347187042,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "Measurement": {
+                "CodesetId": 1,
+                "MeasurementTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "All"
+        },
+        "AdditionalCriteria": {
+          "Type": "ALL",
+          "CriteriaList": {
+            "attr_class": "AsIs"
+          },
+          "DemographicCriteriaList": {
+            "attr_class": "AsIs"
+          },
+          "Groups": {
+            "attr_class": "AsIs"
+          }
+        },
+        "ConceptSets": [
+          {
+            "id": 1,
+            "name": "[HJ] Walters - BMI",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 3038553,
+                    "CONCEPT_NAME": "Body mass index (BMI) [Ratio]",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "39156-5",
+                    "DOMAIN_ID": "Measurement",
+                    "VOCABULARY_ID": "LOINC",
+                    "CONCEPT_CLASS_ID": "Clinical Observation"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": false,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "Last",
+        "ExpressionLimit": "All",
+        "InclusionRules": {
+          "attr_class": "AsIs"
+        },
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"Measurement\": {\n \"CodesetId\":        1,\n\"MeasurementTypeExclude\": false \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"All\" \n} \n},\n\"AdditionalCriteria\": {\n \"Type\": \"ALL\",\n\"CriteriaList\": [],\n\"DemographicCriteriaList\": [],\n\"Groups\": [] \n},\n\"ConceptSets\": [\n {\n \"id\":        1,\n\"name\": \"[HJ] Walters - BMI\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  3038553,\n\"CONCEPT_NAME\": \"Body mass index (BMI) [Ratio]\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"39156-5\",\n\"DOMAIN_ID\": \"Measurement\",\n\"VOCABULARY_ID\": \"LOINC\",\n\"CONCEPT_CLASS_ID\": \"Clinical Observation\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": false,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"Last\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"All\" \n},\n\"InclusionRules\": [],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    },
+    {
+      "id": 19820,
+      "name": "BMI_squared",
+      "createdDate": 1607527377085,
+      "modifiedDate": 1607527395996,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "Measurement": {
+                "CodesetId": 1,
+                "MeasurementTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "All"
+        },
+        "AdditionalCriteria": {
+          "Type": "ALL",
+          "CriteriaList": {
+            "attr_class": "AsIs"
+          },
+          "DemographicCriteriaList": {
+            "attr_class": "AsIs"
+          },
+          "Groups": {
+            "attr_class": "AsIs"
+          }
+        },
+        "ConceptSets": [
+          {
+            "id": 1,
+            "name": "[HJ] Walters - BMI",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 3038553,
+                    "CONCEPT_NAME": "Body mass index (BMI) [Ratio]",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "39156-5",
+                    "DOMAIN_ID": "Measurement",
+                    "VOCABULARY_ID": "LOINC",
+                    "CONCEPT_CLASS_ID": "Clinical Observation"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": false,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "Last",
+        "ExpressionLimit": "All",
+        "InclusionRules": {
+          "attr_class": "AsIs"
+        },
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"Measurement\": {\n \"CodesetId\":        1,\n\"MeasurementTypeExclude\": false \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"All\" \n} \n},\n\"AdditionalCriteria\": {\n \"Type\": \"ALL\",\n\"CriteriaList\": [],\n\"DemographicCriteriaList\": [],\n\"Groups\": [] \n},\n\"ConceptSets\": [\n {\n \"id\":        1,\n\"name\": \"[HJ] Walters - BMI\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  3038553,\n\"CONCEPT_NAME\": \"Body mass index (BMI) [Ratio]\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"39156-5\",\n\"DOMAIN_ID\": \"Measurement\",\n\"VOCABULARY_ID\": \"LOINC\",\n\"CONCEPT_CLASS_ID\": \"Clinical Observation\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": false,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"Last\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"All\" \n},\n\"InclusionRules\": [],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    },
+    {
+      "id": 18205,
+      "name": "Smoking_status_never",
+      "createdDate": 1598536781208,
+      "modifiedDate": 1600416149030,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "Observation": {
+                "CodesetId": 1,
+                "ObservationTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "All"
+        },
+        "ConceptSets": [
+          {
+            "id": 1,
+            "name": "[HJ] Walters - Smoking status: never",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4052464,
+                    "CONCEPT_NAME": "Current non-smoker",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "160618006",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4310250,
+                    "CONCEPT_NAME": "Ex-smoker",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "8517006",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4222303,
+                    "CONCEPT_NAME": "Non-smoker",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "8392000",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4144272,
+                    "CONCEPT_NAME": "Never smoked tobacco",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "266919005",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "First",
+        "ExpressionLimit": "All",
+        "InclusionRules": {
+          "attr_class": "AsIs"
+        },
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"Observation\": {\n \"CodesetId\":        1,\n\"ObservationTypeExclude\": false \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"All\" \n} \n},\n\"ConceptSets\": [\n {\n \"id\":        1,\n\"name\": \"[HJ] Walters - Smoking status: never\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  4052464,\n\"CONCEPT_NAME\": \"Current non-smoker\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"160618006\",\n\"DOMAIN_ID\": \"Observation\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4310250,\n\"CONCEPT_NAME\": \"Ex-smoker\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"8517006\",\n\"DOMAIN_ID\": \"Observation\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": true,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4222303,\n\"CONCEPT_NAME\": \"Non-smoker\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"8392000\",\n\"DOMAIN_ID\": \"Observation\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4144272,\n\"CONCEPT_NAME\": \"Never smoked tobacco\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"266919005\",\n\"DOMAIN_ID\": \"Observation\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"First\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"All\" \n},\n\"InclusionRules\": [],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    },
+    {
+      "id": 18207,
+      "name": "Smoking_status_past",
+      "createdDate": 1598536975598,
+      "modifiedDate": 1600415941215,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "Observation": {
+                "CodesetId": 0,
+                "ObservationTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "All"
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "[HJ] Walters - Smoking status: past",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4310250,
+                    "CONCEPT_NAME": "Ex-smoker",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "8517006",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4052464,
+                    "CONCEPT_NAME": "Current non-smoker",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "160618006",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4298794,
+                    "CONCEPT_NAME": "Smoker",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "77176002",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "First",
+        "ExpressionLimit": "All",
+        "InclusionRules": {
+          "attr_class": "AsIs"
+        },
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"Observation\": {\n \"CodesetId\":        0,\n\"ObservationTypeExclude\": false \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"All\" \n} \n},\n\"ConceptSets\": [\n {\n \"id\":        0,\n\"name\": \"[HJ] Walters - Smoking status: past\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  4310250,\n\"CONCEPT_NAME\": \"Ex-smoker\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"8517006\",\n\"DOMAIN_ID\": \"Observation\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4052464,\n\"CONCEPT_NAME\": \"Current non-smoker\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"160618006\",\n\"DOMAIN_ID\": \"Observation\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4298794,\n\"CONCEPT_NAME\": \"Smoker\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"77176002\",\n\"DOMAIN_ID\": \"Observation\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": true,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"First\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"All\" \n},\n\"InclusionRules\": [],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    },
+    {
+      "id": 18206,
+      "name": "Smoking_status_current",
+      "createdDate": 1598536901799,
+      "modifiedDate": 1600415543749,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "Observation": {
+                "CodesetId": 0,
+                "ObservationTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "All"
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "[HJ] Walters - Smoking status: current",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4310250,
+                    "CONCEPT_NAME": "Ex-smoker",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "8517006",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4298794,
+                    "CONCEPT_NAME": "Smoker",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "77176002",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "First",
+        "ExpressionLimit": "All",
+        "InclusionRules": {
+          "attr_class": "AsIs"
+        },
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"Observation\": {\n \"CodesetId\":        0,\n\"ObservationTypeExclude\": false \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"All\" \n} \n},\n\"ConceptSets\": [\n {\n \"id\":        0,\n\"name\": \"[HJ] Walters - Smoking status: current\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  4310250,\n\"CONCEPT_NAME\": \"Ex-smoker\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"8517006\",\n\"DOMAIN_ID\": \"Observation\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": true,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4298794,\n\"CONCEPT_NAME\": \"Smoker\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"77176002\",\n\"DOMAIN_ID\": \"Observation\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"First\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"All\" \n},\n\"InclusionRules\": [],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    },
+    {
+      "id": 18208,
+      "name": "History_of_alcohol_problem",
+      "createdDate": 1598537720826,
+      "modifiedDate": 1607618191859,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 1,
+                "ConditionTypeExclude": false
+              }
+            },
+            {
+              "Observation": {
+                "CodesetId": 2,
+                "ObservationTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "All"
+        },
+        "ConceptSets": [
+          {
+            "id": 1,
+            "name": "[HJ] History of alcohol problem [CON]",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4218106,
+                    "CONCEPT_NAME": "Alcoholism",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "7200002",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 2,
+            "name": "[HJ] History of alcohol problem [OBS]",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4058714,
+                    "CONCEPT_NAME": "H/O: alcoholism",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "161466001",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Context-dependent"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "First",
+        "ExpressionLimit": "All",
+        "InclusionRules": {
+          "attr_class": "AsIs"
+        },
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"ConditionOccurrence\": {\n \"CodesetId\":        1,\n\"ConditionTypeExclude\": false \n} \n},\n{\n \"Observation\": {\n \"CodesetId\":        2,\n\"ObservationTypeExclude\": false \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"All\" \n} \n},\n\"ConceptSets\": [\n {\n \"id\":        1,\n\"name\": \"[HJ] History of alcohol problem [CON]\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  4218106,\n\"CONCEPT_NAME\": \"Alcoholism\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"7200002\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        2,\n\"name\": \"[HJ] History of alcohol problem [OBS]\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  4058714,\n\"CONCEPT_NAME\": \"H/O: alcoholism\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"161466001\",\n\"DOMAIN_ID\": \"Observation\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Context-dependent\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"First\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"All\" \n},\n\"InclusionRules\": [],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    },
+    {
+      "id": 19842,
+      "name": "History_of_diabetes",
+      "createdDate": 1607615956441,
+      "modifiedDate": 1607617993534,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 4,
+                "ConditionTypeExclude": false
+              }
+            },
+            {
+              "Observation": {
+                "CodesetId": 3,
+                "ObservationTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "All"
+        },
+        "ConceptSets": [
+          {
+            "id": 3,
+            "name": "[HJ] Walters - History of diabetes [OBS]",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4058709,
+                    "CONCEPT_NAME": "H/O: diabetes mellitus",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "161445009",
+                    "DOMAIN_ID": "Observation",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Context-dependent"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 4,
+            "name": "[HJ] Walters - History of diabetes [CON]",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 201820,
+                    "CONCEPT_NAME": "Diabetes mellitus",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "73211009",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "First",
+        "ExpressionLimit": "All",
+        "InclusionRules": {
+          "attr_class": "AsIs"
+        },
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"ConditionOccurrence\": {\n \"CodesetId\":        4,\n\"ConditionTypeExclude\": false \n} \n},\n{\n \"Observation\": {\n \"CodesetId\":        3,\n\"ObservationTypeExclude\": false \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"All\" \n} \n},\n\"ConceptSets\": [\n {\n \"id\":        3,\n\"name\": \"[HJ] Walters - History of diabetes [OBS]\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  4058709,\n\"CONCEPT_NAME\": \"H/O: diabetes mellitus\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"161445009\",\n\"DOMAIN_ID\": \"Observation\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Context-dependent\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        4,\n\"name\": \"[HJ] Walters - History of diabetes [CON]\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":   201820,\n\"CONCEPT_NAME\": \"Diabetes mellitus\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"73211009\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"First\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"All\" \n},\n\"InclusionRules\": [],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    },
+    {
+      "id": 18230,
+      "name": "Depression",
+      "description": "The first condition record of depression, which is followed by another depression condition record, at least two drugs used to treat depression without another indication, or two psychotherapy procedures",
+      "createdDate": 1598618574576,
+      "modifiedDate": 1600354872126,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "DrugExposure": {
+                "CodesetId": 7,
+                "DrugTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "All"
+        },
+        "AdditionalCriteria": {
+          "Type": "ANY",
+          "CriteriaList": [
+            {
+              "Criteria": {
+                "ProcedureOccurrence": {
+                  "CodesetId": 9,
+                  "ProcedureTypeExclude": false
+                }
+              },
+              "StartWindow": {
+                "Start": [365, -1],
+                "End": [0, 1],
+                "UseIndexEnd": false,
+                "UseEventEnd": false
+              },
+              "RestrictVisit": false,
+              "IgnoreObservationPeriod": false,
+              "Occurrence": {
+                "Type": 2,
+                "Count": 1,
+                "IsDistinct": false
+              }
+            },
+            {
+              "Criteria": {
+                "ConditionOccurrence": {
+                  "CodesetId": 6,
+                  "ConditionTypeExclude": false
+                }
+              },
+              "StartWindow": {
+                "Start": [365, -1],
+                "End": [0, 1],
+                "UseIndexEnd": false,
+                "UseEventEnd": false
+              },
+              "RestrictVisit": false,
+              "IgnoreObservationPeriod": false,
+              "Occurrence": {
+                "Type": 2,
+                "Count": 1,
+                "IsDistinct": false
+              }
+            }
+          ],
+          "DemographicCriteriaList": {
+            "attr_class": "AsIs"
+          },
+          "Groups": {
+            "attr_class": "AsIs"
+          }
+        },
+        "ConceptSets": [
+          {
+            "id": 6,
+            "name": "[HJ] Walters - Depression",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 442306,
+                    "CONCEPT_NAME": "Adjustment disorder with depressed mood",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "57194009",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 436665,
+                    "CONCEPT_NAME": "Bipolar disorder",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "13746004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": true,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 440383,
+                    "CONCEPT_NAME": "Depressive disorder",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "35489007",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4175329,
+                    "CONCEPT_NAME": "Organic mood disorder of depressed type",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "42594001",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 7,
+            "name": "[HJ] Walters - Drugs to treat depression",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 21604686,
+                    "CONCEPT_NAME": "ANTIDEPRESSANTS",
+                    "STANDARD_CONCEPT": "C",
+                    "STANDARD_CONCEPT_CAPTION": "Classification",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "N06A",
+                    "DOMAIN_ID": "Drug",
+                    "VOCABULARY_ID": "ATC",
+                    "CONCEPT_CLASS_ID": "ATC 3rd"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 8,
+            "name": "[HJ] Walters - Other indications for drugs used to treat depression",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 438407,
+                    "CONCEPT_NAME": "Bulimia nervosa",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "78004001",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4311708,
+                    "CONCEPT_NAME": "Diabetic peripheral neuropathy",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "424736006",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 434613,
+                    "CONCEPT_NAME": "Generalized anxiety disorder",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "21897009",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 436962,
+                    "CONCEPT_NAME": "Insomnia",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "193462001",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 440374,
+                    "CONCEPT_NAME": "Obsessive-compulsive disorder",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "191736004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 436074,
+                    "CONCEPT_NAME": "Panic disorder",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "371631005",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 436676,
+                    "CONCEPT_NAME": "Posttraumatic stress disorder",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "47505003",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4242733,
+                    "CONCEPT_NAME": "Premenstrual dysphoric disorder",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "596004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 440690,
+                    "CONCEPT_NAME": "Social phobia",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "25501002",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 9,
+            "name": "[HJ] Walters - Procedures for depression",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4030840,
+                    "CONCEPT_NAME": "Electroconvulsive therapy",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "23835007",
+                    "DOMAIN_ID": "Procedure",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Procedure"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 2795842,
+                    "CONCEPT_NAME": "Mental Health, Electroconvulsive Therapy",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "GZB",
+                    "DOMAIN_ID": "Procedure",
+                    "VOCABULARY_ID": "ICD10PCS",
+                    "CONCEPT_CLASS_ID": "ICD10PCS"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 2795675,
+                    "CONCEPT_NAME": "Mental Health, Individual Psychotherapy",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "GZ5",
+                    "DOMAIN_ID": "Procedure",
+                    "VOCABULARY_ID": "ICD10PCS",
+                    "CONCEPT_CLASS_ID": "ICD10PCS"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4327941,
+                    "CONCEPT_NAME": "Psychotherapy",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "75516001",
+                    "DOMAIN_ID": "Procedure",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Procedure"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 45887951,
+                    "CONCEPT_NAME": "Psychotherapy Services and Procedures",
+                    "STANDARD_CONCEPT": "C",
+                    "STANDARD_CONCEPT_CAPTION": "Classification",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "1021137",
+                    "DOMAIN_ID": "Procedure",
+                    "VOCABULARY_ID": "CPT4",
+                    "CONCEPT_CLASS_ID": "CPT4 Hierarchy"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "All",
+        "ExpressionLimit": "First",
+        "InclusionRules": {
+          "attr_class": "AsIs"
+        },
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"DrugExposure\": {\n \"CodesetId\":        7,\n\"DrugTypeExclude\": false \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"All\" \n} \n},\n\"AdditionalCriteria\": {\n \"Type\": \"ANY\",\n\"CriteriaList\": [\n {\n \"Criteria\": {\n \"ProcedureOccurrence\": {\n \"CodesetId\":        9,\n\"ProcedureTypeExclude\": false \n} \n},\n\"StartWindow\": {\n \"Start\": {\n \"Days\":      365,\n\"Coeff\":       -1 \n},\n\"End\": {\n \"Days\":        0,\n\"Coeff\":        1 \n},\n\"UseIndexEnd\": false,\n\"UseEventEnd\": false \n},\n\"RestrictVisit\": false,\n\"IgnoreObservationPeriod\": false,\n\"Occurrence\": {\n \"Type\":        2,\n\"Count\":        1,\n\"IsDistinct\": false \n} \n},\n{\n \"Criteria\": {\n \"ConditionOccurrence\": {\n \"CodesetId\":        6,\n\"ConditionTypeExclude\": false \n} \n},\n\"StartWindow\": {\n \"Start\": {\n \"Days\":      365,\n\"Coeff\":       -1 \n},\n\"End\": {\n \"Days\":        0,\n\"Coeff\":        1 \n},\n\"UseIndexEnd\": false,\n\"UseEventEnd\": false \n},\n\"RestrictVisit\": false,\n\"IgnoreObservationPeriod\": false,\n\"Occurrence\": {\n \"Type\":        2,\n\"Count\":        1,\n\"IsDistinct\": false \n} \n} \n],\n\"DemographicCriteriaList\": [],\n\"Groups\": [] \n},\n\"ConceptSets\": [\n {\n \"id\":        6,\n\"name\": \"[HJ] Walters - Depression\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":   442306,\n\"CONCEPT_NAME\": \"Adjustment disorder with depressed mood\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"57194009\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   436665,\n\"CONCEPT_NAME\": \"Bipolar disorder\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"13746004\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": true,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   440383,\n\"CONCEPT_NAME\": \"Depressive disorder\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"35489007\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4175329,\n\"CONCEPT_NAME\": \"Organic mood disorder of depressed type\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"42594001\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        7,\n\"name\": \"[HJ] Walters - Drugs to treat depression\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\": 2.160469e+07,\n\"CONCEPT_NAME\": \"ANTIDEPRESSANTS\",\n\"STANDARD_CONCEPT\": \"C\",\n\"STANDARD_CONCEPT_CAPTION\": \"Classification\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"N06A\",\n\"DOMAIN_ID\": \"Drug\",\n\"VOCABULARY_ID\": \"ATC\",\n\"CONCEPT_CLASS_ID\": \"ATC 3rd\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        8,\n\"name\": \"[HJ] Walters - Other indications for drugs used to treat depression\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":   438407,\n\"CONCEPT_NAME\": \"Bulimia nervosa\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"78004001\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4311708,\n\"CONCEPT_NAME\": \"Diabetic peripheral neuropathy\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"424736006\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   434613,\n\"CONCEPT_NAME\": \"Generalized anxiety disorder\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"21897009\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   436962,\n\"CONCEPT_NAME\": \"Insomnia\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"193462001\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   440374,\n\"CONCEPT_NAME\": \"Obsessive-compulsive disorder\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"191736004\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   436074,\n\"CONCEPT_NAME\": \"Panic disorder\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"371631005\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   436676,\n\"CONCEPT_NAME\": \"Posttraumatic stress disorder\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"47505003\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4242733,\n\"CONCEPT_NAME\": \"Premenstrual dysphoric disorder\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"596004\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   440690,\n\"CONCEPT_NAME\": \"Social phobia\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"25501002\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n},\n{\n \"id\":        9,\n\"name\": \"[HJ] Walters - Procedures for depression\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  4030840,\n\"CONCEPT_NAME\": \"Electroconvulsive therapy\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"23835007\",\n\"DOMAIN_ID\": \"Procedure\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Procedure\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  2795842,\n\"CONCEPT_NAME\": \"Mental Health, Electroconvulsive Therapy\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"GZB\",\n\"DOMAIN_ID\": \"Procedure\",\n\"VOCABULARY_ID\": \"ICD10PCS\",\n\"CONCEPT_CLASS_ID\": \"ICD10PCS\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  2795675,\n\"CONCEPT_NAME\": \"Mental Health, Individual Psychotherapy\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"GZ5\",\n\"DOMAIN_ID\": \"Procedure\",\n\"VOCABULARY_ID\": \"ICD10PCS\",\n\"CONCEPT_CLASS_ID\": \"ICD10PCS\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4327941,\n\"CONCEPT_NAME\": \"Psychotherapy\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"75516001\",\n\"DOMAIN_ID\": \"Procedure\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Procedure\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\": 4.588795e+07,\n\"CONCEPT_NAME\": \"Psychotherapy Services and Procedures\",\n\"STANDARD_CONCEPT\": \"C\",\n\"STANDARD_CONCEPT_CAPTION\": \"Classification\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"1021137\",\n\"DOMAIN_ID\": \"Procedure\",\n\"VOCABULARY_ID\": \"CPT4\",\n\"CONCEPT_CLASS_ID\": \"CPT4 Hierarchy\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"All\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"First\" \n},\n\"InclusionRules\": [],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    },
+    {
+      "id": 18284,
+      "name": "Stroke",
+      "createdDate": 1598782625710,
+      "modifiedDate": 1598782690130,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 0,
+                "ConditionTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "All"
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "[HJ] Walters - Stroke",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 443551,
+                    "CONCEPT_NAME": "Apraxia due to cerebrovascular accident",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "428668000",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 372924,
+                    "CONCEPT_NAME": "Cerebral artery occlusion",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "20059004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 375557,
+                    "CONCEPT_NAME": "Cerebral embolism",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "75543006",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 443454,
+                    "CONCEPT_NAME": "Cerebral infarction",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "432504007",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 374384,
+                    "CONCEPT_NAME": "Cerebral ischemia",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "287731003",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 441874,
+                    "CONCEPT_NAME": "Cerebral thrombosis",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "71444005",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 381316,
+                    "CONCEPT_NAME": "Cerebrovascular accident",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "230690007",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 44782781,
+                    "CONCEPT_NAME": "Hemiplegia and/or hemiparesis following stroke",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "48601000119107",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 439847,
+                    "CONCEPT_NAME": "Intracranial hemorrhage",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "1386000",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4071867,
+                    "CONCEPT_NAME": "Neonatal cerebral leukomalacia",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "206578007",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 443239,
+                    "CONCEPT_NAME": "Precerebral arterial occlusion",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "266253001",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4112026,
+                    "CONCEPT_NAME": "Sequelae of cerebral infarction",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "195243003",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4111721,
+                    "CONCEPT_NAME": "Sequelae of intracerebral hemorrhage",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "195241001",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4111720,
+                    "CONCEPT_NAME": "Sequelae of subarachnoid hemorrhage",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "195240000",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 43530623,
+                    "CONCEPT_NAME": "Sequela of cerebrovascular accident",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "1131000119105",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 43530606,
+                    "CONCEPT_NAME": "Sequela of traumatic intracranial hemorrhage",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "100581000119102",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 373503,
+                    "CONCEPT_NAME": "Transient cerebral ischemia",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "266257000",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 443605,
+                    "CONCEPT_NAME": "Vascular dementia",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "429998004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 440392,
+                    "CONCEPT_NAME": "Retinal vascular occlusion",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "73757007",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 376714,
+                    "CONCEPT_NAME": "Vertebrobasilar artery syndrome",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "195199008",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 40479575,
+                    "CONCEPT_NAME": "Dysphasia as late effect of cerebrovascular disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "441529001",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 43530687,
+                    "CONCEPT_NAME": "Dysarthria as late effects of cerebrovascular disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "133981000119106",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 43531622,
+                    "CONCEPT_NAME": "Ataxia as sequela of cerebrovascular disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "29941000119105",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 40480002,
+                    "CONCEPT_NAME": "Aphasia as late effect of cerebrovascular disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "441630004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 374060,
+                    "CONCEPT_NAME": "Acute ill-defined cerebrovascular disease",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "288723005",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "All",
+        "ExpressionLimit": "All",
+        "InclusionRules": {
+          "attr_class": "AsIs"
+        },
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"ConditionOccurrence\": {\n \"CodesetId\":        0,\n\"ConditionTypeExclude\": false \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"All\" \n} \n},\n\"ConceptSets\": [\n {\n \"id\":        0,\n\"name\": \"[HJ] Walters - Stroke\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":   443551,\n\"CONCEPT_NAME\": \"Apraxia due to cerebrovascular accident\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"428668000\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   372924,\n\"CONCEPT_NAME\": \"Cerebral artery occlusion\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"20059004\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   375557,\n\"CONCEPT_NAME\": \"Cerebral embolism\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"75543006\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   443454,\n\"CONCEPT_NAME\": \"Cerebral infarction\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"432504007\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   374384,\n\"CONCEPT_NAME\": \"Cerebral ischemia\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"287731003\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   441874,\n\"CONCEPT_NAME\": \"Cerebral thrombosis\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"71444005\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   381316,\n\"CONCEPT_NAME\": \"Cerebrovascular accident\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"230690007\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\": 4.478278e+07,\n\"CONCEPT_NAME\": \"Hemiplegia and/or hemiparesis following stroke\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"48601000119107\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   439847,\n\"CONCEPT_NAME\": \"Intracranial hemorrhage\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"1386000\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4071867,\n\"CONCEPT_NAME\": \"Neonatal cerebral leukomalacia\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"206578007\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   443239,\n\"CONCEPT_NAME\": \"Precerebral arterial occlusion\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"266253001\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4112026,\n\"CONCEPT_NAME\": \"Sequelae of cerebral infarction\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"195243003\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4111721,\n\"CONCEPT_NAME\": \"Sequelae of intracerebral hemorrhage\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"195241001\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4111720,\n\"CONCEPT_NAME\": \"Sequelae of subarachnoid hemorrhage\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"195240000\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\": 4.353062e+07,\n\"CONCEPT_NAME\": \"Sequela of cerebrovascular accident\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"1131000119105\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\": 4.353061e+07,\n\"CONCEPT_NAME\": \"Sequela of traumatic intracranial hemorrhage\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"100581000119102\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   373503,\n\"CONCEPT_NAME\": \"Transient cerebral ischemia\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"266257000\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   443605,\n\"CONCEPT_NAME\": \"Vascular dementia\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"429998004\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   440392,\n\"CONCEPT_NAME\": \"Retinal vascular occlusion\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"73757007\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   376714,\n\"CONCEPT_NAME\": \"Vertebrobasilar artery syndrome\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"195199008\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\": 4.047958e+07,\n\"CONCEPT_NAME\": \"Dysphasia as late effect of cerebrovascular disease\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"441529001\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\": 4.353069e+07,\n\"CONCEPT_NAME\": \"Dysarthria as late effects of cerebrovascular disease\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"133981000119106\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\": 4.353162e+07,\n\"CONCEPT_NAME\": \"Ataxia as sequela of cerebrovascular disease\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"29941000119105\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\": 4.048e+07,\n\"CONCEPT_NAME\": \"Aphasia as late effect of cerebrovascular disease\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"441630004\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":   374060,\n\"CONCEPT_NAME\": \"Acute ill-defined cerebrovascular disease\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"288723005\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"All\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"All\" \n},\n\"InclusionRules\": [],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    },
+    {
+      "id": 18282,
+      "name": "Atrial_fibrillation",
+      "createdDate": 1598779990496,
+      "modifiedDate": 1600357182550,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 0,
+                "ConditionTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "All"
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "[HJ] Walters - Atrial fibrillation",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 313217,
+                    "CONCEPT_NAME": "Atrial fibrillation",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "49436004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "First",
+        "ExpressionLimit": "All",
+        "InclusionRules": {
+          "attr_class": "AsIs"
+        },
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"ConditionOccurrence\": {\n \"CodesetId\":        0,\n\"ConditionTypeExclude\": false \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"All\" \n} \n},\n\"ConceptSets\": [\n {\n \"id\":        0,\n\"name\": \"[HJ] Walters - Atrial fibrillation\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":   313217,\n\"CONCEPT_NAME\": \"Atrial fibrillation\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"49436004\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"First\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"All\" \n},\n\"InclusionRules\": [],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    },
+    {
+      "id": 18283,
+      "name": "Current_aspirin_use",
+      "createdDate": 1598780713734,
+      "modifiedDate": 1600357211555,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "DrugEra": 0
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "All"
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "[HJ] Walters - Aspirin",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 1112807,
+                    "CONCEPT_NAME": "aspirin",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "1191",
+                    "DOMAIN_ID": "Drug",
+                    "VOCABULARY_ID": "RxNorm",
+                    "CONCEPT_CLASS_ID": "Ingredient"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "First",
+        "ExpressionLimit": "All",
+        "InclusionRules": {
+          "attr_class": "AsIs"
+        },
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"DrugEra\": {\n \"CodesetId\":        0 \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"All\" \n} \n},\n\"ConceptSets\": [\n {\n \"id\":        0,\n\"name\": \"[HJ] Walters - Aspirin\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  1112807,\n\"CONCEPT_NAME\": \"aspirin\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"1191\",\n\"DOMAIN_ID\": \"Drug\",\n\"VOCABULARY_ID\": \"RxNorm\",\n\"CONCEPT_CLASS_ID\": \"Ingredient\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"First\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"All\" \n},\n\"InclusionRules\": [],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    },
+    {
+      "id": 18224,
+      "name": "Social_deprivation",
+      "createdDate": 1598608581942,
+      "modifiedDate": 1598608693057,
+      "hasWriteAccess": false,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CodesetId": 2,
+                "ConditionTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": [0, 0],
+          "PrimaryCriteriaLimit": "All"
+        },
+        "ConceptSets": [
+          {
+            "id": 2,
+            "name": "[HJ] Walters - Social deprivation",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4019836,
+                    "CONCEPT_NAME": "Social exclusion",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "105412007",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4019835,
+                    "CONCEPT_NAME": "Social withdrawal",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "105411000",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4307117,
+                    "CONCEPT_NAME": "Social outcast",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "423049000",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": "First",
+        "ExpressionLimit": "First",
+        "InclusionRules": {
+          "attr_class": "AsIs"
+        },
+        "CensoringCriteria": {
+          "attr_class": "AsIs"
+        },
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "expressionSql": "{\n \"cdmVersionRange\": \">=5.0.0\",\n\"PrimaryCriteria\": {\n \"CriteriaList\": [\n {\n \"ConditionOccurrence\": {\n \"CodesetId\":        2,\n\"ConditionTypeExclude\": false \n} \n} \n],\n\"ObservationWindow\": {\n \"PriorDays\":        0,\n\"PostDays\":        0 \n},\n\"PrimaryCriteriaLimit\": {\n \"Type\": \"All\" \n} \n},\n\"ConceptSets\": [\n {\n \"id\":        2,\n\"name\": \"[HJ] Walters - Social deprivation\",\n\"expression\": {\n \"items\": [\n {\n \"concept\": {\n \"CONCEPT_ID\":  4019836,\n\"CONCEPT_NAME\": \"Social exclusion\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"105412007\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4019835,\n\"CONCEPT_NAME\": \"Social withdrawal\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"105411000\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n},\n{\n \"concept\": {\n \"CONCEPT_ID\":  4307117,\n\"CONCEPT_NAME\": \"Social outcast\",\n\"STANDARD_CONCEPT\": \"S\",\n\"STANDARD_CONCEPT_CAPTION\": \"Standard\",\n\"INVALID_REASON\": \"V\",\n\"INVALID_REASON_CAPTION\": \"Valid\",\n\"CONCEPT_CODE\": \"423049000\",\n\"DOMAIN_ID\": \"Condition\",\n\"VOCABULARY_ID\": \"SNOMED\",\n\"CONCEPT_CLASS_ID\": \"Clinical Finding\" \n},\n\"isExcluded\": false,\n\"includeDescendants\": true,\n\"includeMapped\": false \n} \n] \n} \n} \n],\n\"QualifiedLimit\": {\n \"Type\": \"First\" \n},\n\"ExpressionLimit\": {\n \"Type\": \"First\" \n},\n\"InclusionRules\": [],\n\"CensoringCriteria\": [],\n\"CollapseSettings\": {\n \"CollapseType\": \"ERA\",\n\"EraPad\":        0 \n},\n\"CensorWindow\": {} \n}"
+    }
+  ],
+  "populationSettings": {
+    "binary": true,
+    "includeAllOutcomes": false,
+    "firstExposureOnly": true,
+    "washoutPeriod": 365,
+    "removeSubjectsWithPriorOutcome": true,
+    "priorOutcomeLookback": 9999,
+    "requireTimeAtRisk": true,
+    "minTimeAtRisk": 365,
+    "riskWindowStart": 1,
+    "startAnchor": "cohort start",
+    "riskWindowEnd": 1825,
+    "endAnchor": "cohort start",
+    "verbosity": "INFO",
+    "attr_class": "populationSettings"
+  },
+  "modelSettings": [
+    {
+      "details": {
+        "modelName": "walters_dementia_model",
+        "author": "NA",
+        "date": "2021-02-22"
+      },
+      "covariateSettings": {
+        "createCohortCovariateSettings": [
+          {
+            "covariateName": "BMI days before: -365 days after: 0",
+            "covariateId": 18203456,
+            "cohortId": 18203,
+            "startDay": -365,
+            "endDay": 0,
+            "count": false,
+            "ageInteraction": false,
+            "lnAgeInteraction": false,
+            "analysisId": 456
+          },
+          {
+            "covariateName": "NABMI squaredNANA days before: -365 days after: 0",
+            "covariateId": 19820456,
+            "cohortId": 19820,
+            "startDay": -365,
+            "endDay": 0,
+            "count": null,
+            "ageInteraction": null,
+            "lnAgeInteraction": null,
+            "analysisId": 456
+          },
+          {
+            "covariateName": "NASmoking status neverNANA days before: -1825 days after: 0",
+            "covariateId": 18205456,
+            "cohortId": 18205,
+            "startDay": -1825,
+            "endDay": 0,
+            "count": null,
+            "ageInteraction": null,
+            "lnAgeInteraction": null,
+            "analysisId": 456
+          },
+          {
+            "covariateName": "NASmoking status pastNANA days before: -1825 days after: 0",
+            "covariateId": 18207456,
+            "cohortId": 18207,
+            "startDay": -1825,
+            "endDay": 0,
+            "count": null,
+            "ageInteraction": null,
+            "lnAgeInteraction": null,
+            "analysisId": 456
+          },
+          {
+            "covariateName": "NASmoking status currentNANA days before: -1825 days after: 0",
+            "covariateId": 18206456,
+            "cohortId": 18206,
+            "startDay": -1825,
+            "endDay": 0,
+            "count": null,
+            "ageInteraction": null,
+            "lnAgeInteraction": null,
+            "analysisId": 456
+          },
+          {
+            "covariateName": "NAHistory of alcohol problemNANA days before: -9999 days after: 0",
+            "covariateId": 18208456,
+            "cohortId": 18208,
+            "startDay": -9999,
+            "endDay": 0,
+            "count": null,
+            "ageInteraction": null,
+            "lnAgeInteraction": null,
+            "analysisId": 456
+          },
+          {
+            "covariateName": "NAHistory of diabetesNANA days before: -9999 days after: 0",
+            "covariateId": 19842456,
+            "cohortId": 19842,
+            "startDay": -9999,
+            "endDay": 0,
+            "count": null,
+            "ageInteraction": null,
+            "lnAgeInteraction": null,
+            "analysisId": 456
+          },
+          {
+            "covariateName": "NADepressionNANA days before: -365 days after: 0",
+            "covariateId": 18230456,
+            "cohortId": 18230,
+            "startDay": -365,
+            "endDay": 0,
+            "count": null,
+            "ageInteraction": null,
+            "lnAgeInteraction": null,
+            "analysisId": 456
+          },
+          {
+            "covariateName": "NAStrokeNANA days before: -9999 days after: 0",
+            "covariateId": 18284456,
+            "cohortId": 18284,
+            "startDay": -9999,
+            "endDay": 0,
+            "count": null,
+            "ageInteraction": null,
+            "lnAgeInteraction": null,
+            "analysisId": 456
+          },
+          {
+            "covariateName": "NAAtrial fibrillationNANA days before: -9999 days after: 0",
+            "covariateId": 18282456,
+            "cohortId": 18282,
+            "startDay": -9999,
+            "endDay": 0,
+            "count": null,
+            "ageInteraction": null,
+            "lnAgeInteraction": null,
+            "analysisId": 456
+          },
+          {
+            "covariateName": "NACurrent aspirin useNANA days before: -365 days after: 0",
+            "covariateId": 18283456,
+            "cohortId": 18283,
+            "startDay": -365,
+            "endDay": 0,
+            "count": null,
+            "ageInteraction": null,
+            "lnAgeInteraction": null,
+            "analysisId": 456
+          },
+          {
+            "covariateName": "NASocial deprivationNANA days before: -365 days after: 0",
+            "covariateId": 18224456,
+            "cohortId": 18224,
+            "startDay": -365,
+            "endDay": 0,
+            "count": null,
+            "ageInteraction": null,
+            "lnAgeInteraction": null,
+            "analysisId": 456
+          }
+        ]
+      },
+      "model": {
+        "modelFunction": "glm",
+        "settings": {
+          "finalMapping": "function(x){return(1-0.9969^exp(x))}",
+          "predictionType": "survival",
+          "coefficients": [
+            {
+              "covariateId": 18203456,
+              "points": -0.0616,
+              "attr_row.names": 1,
+              "attr_class": "data.frame"
+            },
+            {
+              "covariateId": 19820456,
+              "points": 0.0025,
+              "attr_row.names": 2,
+              "attr_class": "data.frame"
+            },
+            {
+              "covariateId": 18205456,
+              "points": 0,
+              "attr_row.names": 3,
+              "attr_class": "data.frame"
+            },
+            {
+              "covariateId": 18207456,
+              "points": -0.0679,
+              "attr_row.names": 4,
+              "attr_class": "data.frame"
+            },
+            {
+              "covariateId": 18206456,
+              "points": -0.0866,
+              "attr_row.names": 5,
+              "attr_class": "data.frame"
+            },
+            {
+              "covariateId": 18208456,
+              "points": 0.4435,
+              "attr_row.names": 6,
+              "attr_class": "data.frame"
+            },
+            {
+              "covariateId": 19842456,
+              "points": 0.2867,
+              "attr_row.names": 7,
+              "attr_class": "data.frame"
+            },
+            {
+              "covariateId": 18230456,
+              "points": 0.8336,
+              "attr_row.names": 8,
+              "attr_class": "data.frame"
+            },
+            {
+              "covariateId": 18284456,
+              "points": 0.5772,
+              "attr_row.names": 9,
+              "attr_class": "data.frame"
+            },
+            {
+              "covariateId": 18282456,
+              "points": 0.2207,
+              "attr_row.names": 10,
+              "attr_class": "data.frame"
+            },
+            {
+              "covariateId": 18283456,
+              "points": 0.2528,
+              "attr_row.names": 11,
+              "attr_class": "data.frame"
+            },
+            {
+              "covariateId": 18224456,
+              "points": 0.2255,
+              "attr_row.names": 12,
+              "attr_class": "data.frame"
+            }
+          ]
+        }
+      },
+      "cohorts": [
+        {
+          "atlasId": 18203,
+          "cohortName": "BMI",
+          "attr_row.names": 1,
+          "attr_class": "data.frame"
+        },
+        {
+          "atlasId": 19820,
+          "cohortName": "BMI_squared",
+          "attr_row.names": 2,
+          "attr_class": "data.frame"
+        },
+        {
+          "atlasId": 18205,
+          "cohortName": "Smoking_status_never",
+          "attr_row.names": 3,
+          "attr_class": "data.frame"
+        },
+        {
+          "atlasId": 18207,
+          "cohortName": "Smoking_status_past",
+          "attr_row.names": 4,
+          "attr_class": "data.frame"
+        },
+        {
+          "atlasId": 18206,
+          "cohortName": "Smoking_status_current",
+          "attr_row.names": 5,
+          "attr_class": "data.frame"
+        },
+        {
+          "atlasId": 18208,
+          "cohortName": "History_of_alcohol_problem",
+          "attr_row.names": 6,
+          "attr_class": "data.frame"
+        },
+        {
+          "atlasId": 19842,
+          "cohortName": "History_of_diabetes",
+          "attr_row.names": 7,
+          "attr_class": "data.frame"
+        },
+        {
+          "atlasId": 18230,
+          "cohortName": "Depression",
+          "attr_row.names": 8,
+          "attr_class": "data.frame"
+        },
+        {
+          "atlasId": 18284,
+          "cohortName": "Stroke",
+          "attr_row.names": 9,
+          "attr_class": "data.frame"
+        },
+        {
+          "atlasId": 18282,
+          "cohortName": "Atrial_fibrillation",
+          "attr_row.names": 10,
+          "attr_class": "data.frame"
+        },
+        {
+          "atlasId": 18283,
+          "cohortName": "Current_aspirin_use",
+          "attr_row.names": 11,
+          "attr_class": "data.frame"
+        },
+        {
+          "atlasId": 18224,
+          "cohortName": "Social_deprivation",
+          "attr_row.names": 12,
+          "attr_class": "data.frame"
+        }
+      ]
+    }
+  ]
+}
